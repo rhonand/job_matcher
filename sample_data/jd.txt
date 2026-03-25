@@ -1,0 +1,38 @@
+Overview
+Microsoft Teams is the hub for modern collaboration—bringing together everything teams need to succeed, all within the Office 365 ecosystem. It serves as the canvas that unifies your content, tools, people, and conversations in one seamless experience. As one of Microsoft’s most dynamic and impactful products, Teams is redefining the future of teamwork—and we’re just getting started.
+
+Within the Messaging Services team, we’re evolving our microservices architecture to deliver new messaging capabilities while ensuring high performance, scalability, and cost efficiency. We’re looking for a passionate and skilled Software Development Engineer to help us build robust, scalable backend services that power critical messaging experiences. This is a unique opportunity to sharpen your system design skills and work with a modern tech stack including .NET Core, Event hubs, Redis, and Azure Cosmos DB—all while collaborating across teams and organizations.
+
+We take pride in how we build. Our team runs lean, stays customer-obsessed, and makes decisions grounded in data. We embrace a live-site-first, metric-driven culture that minimizes tech debt and maximizes impact. In this role, you’ll take end-to-end ownership, drive meaningful outcomes, and directly influence customer satisfaction and business growth.
+
+Microsoft’s mission is to empower every person and every organization on the planet to achieve more. As employees we come together with a growth mindset, innovate to empower others, and collaborate to realize our shared goals. Each day we build on our values of respect, integrity, and accountability to create a culture of inclusion where everyone can thrive at work and beyond.
+
+
+
+Responsibilities
+As part of the Messaging Services engineering team, you will be designing, developing and maintaining high scale services that form the backbone of Microsoft Teams.
+Own and operate services of massive scale and importance.
+You are expected to dive deep into Azure technologies and distributed database systems.
+You will collaborate with partners, internal and external to Microsoft Teams organization, in order to design and build features that drive growth in our user base.
+We have numerous partners and thus, strong collaboration skills are required.
+As you develop said features to delight our customers, you are expected to always keep availability, reliability, performance and scalability in mind.
+We never compromise on these fundamentals.
+Influence and create new designs, architectures, standards and methods for large-scale distributed systems.
+Build reusable libraries of services best practices for other teams to leverage.
+
+
+Qualifications
+Required Qualifications:
+
+Bachelor's Degree in Computer Science, or related technical discipline with proven experience coding in languages including, but not limited to, C, C++, C#, Java, JavaScript, or Python OR equivalent experience.
+ 
+Preferred Qualifications:
+Master's Degree in Computer Science or related technical field with proven experience coding in languages including, but not limited to, C, C++, C#, Java, JavaScript, or Python OR Bachelor's Degree in Computer Science or related technical field AND 2+ years technical engineering experience with coding in languages including, but not limited to, C, C++, C#, Java, JavaScript, or Python OR equivalent experience.
+Experience working with Service Fabric or Kubernetes.Experience working on large-scale distributed systems, client-server architectures, and distributed database systems.
+Excellent cross group collaboration, negotiation and communication skills.
+Ability to deal with the ambiguity associated with working in a fast-paced and changing environment.
+Experience working with M365 components like AAD, Exchange, Substrate, SharePoint.
+Solid passion for delivering high-quality, resilient, large scale services.
+Solid coding and development skills with experience in at least one of the following languages: C#, .Net Core, JavaPassionate about solving challenging problems.
+Drive to improve performance, availability and supportability of services.
+Drive to increase efficiencies through automation.

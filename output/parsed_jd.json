@@ -1,0 +1,255 @@
+{
+  "job_title": "Software Development Engineer",
+  "company_name": "Microsoft",
+  "seniority": null,
+  "employment_type": null,
+  "domain": "backend development",
+  "summary": "Design and maintain high-scale backend services for Microsoft Teams messaging using .NET Core, Azure services, and distributed systems, ensuring performance, scalability, and reliability.",
+  "requirements": [
+    {
+      "id": "req_0",
+      "text": "Bachelor's Degree in Computer Science or related technical discipline OR equivalent experience.",
+      "category": "domain_knowledge",
+      "importance": "required",
+      "keywords": [
+        "Bachelor's Degree",
+        "Computer Science",
+        "equivalent experience"
+      ]
+    },
+    {
+      "id": "req_1",
+      "text": "Proven experience coding in languages including, but not limited to, C, C++, C#, Java, JavaScript, or Python.",
+      "category": "programming_language",
+      "importance": "required",
+      "keywords": [
+        "C",
+        "C#",
+        "C++",
+        "Java",
+        "JavaScript",
+        "Python",
+        "coding experience"
+      ]
+    },
+    {
+      "id": "req_2",
+      "text": "Master's Degree in Computer Science or related technical field OR Bachelor's Degree with 2+ years technical engineering experience.",
+      "category": "domain_knowledge",
+      "importance": "preferred",
+      "keywords": [
+        "2+ years experience",
+        "Bachelor's Degree",
+        "Master's Degree",
+        "technical engineering"
+      ]
+    },
+    {
+      "id": "req_3",
+      "text": "Experience working with Service Fabric or Kubernetes.",
+      "category": "framework",
+      "importance": "preferred",
+      "keywords": [
+        "Kubernetes",
+        "Service Fabric"
+      ]
+    },
+    {
+      "id": "req_4",
+      "text": "Experience working on large-scale distributed systems, client-server architectures, and distributed database systems.",
+      "category": "backend",
+      "importance": "preferred",
+      "keywords": [
+        "client-server architectures",
+        "distributed database systems",
+        "large-scale distributed systems"
+      ]
+    },
+    {
+      "id": "req_5",
+      "text": "Excellent cross group collaboration, negotiation and communication skills.",
+      "category": "soft_skill",
+      "importance": "preferred",
+      "keywords": [
+        "collaboration",
+        "communication",
+        "negotiation"
+      ]
+    },
+    {
+      "id": "req_6",
+      "text": "Ability to deal with the ambiguity associated with working in a fast-paced and changing environment.",
+      "category": "soft_skill",
+      "importance": "preferred",
+      "keywords": [
+        "ambiguity",
+        "changing environment",
+        "fast-paced"
+      ]
+    },
+    {
+      "id": "req_7",
+      "text": "Experience working with M365 components like AAD, Exchange, Substrate, SharePoint.",
+      "category": "domain_knowledge",
+      "importance": "preferred",
+      "keywords": [
+        "AAD",
+        "Exchange",
+        "M365",
+        "SharePoint",
+        "Substrate"
+      ]
+    },
+    {
+      "id": "req_8",
+      "text": "Solid passion for delivering high-quality, resilient, large scale services.",
+      "category": "soft_skill",
+      "importance": "preferred",
+      "keywords": [
+        "high-quality",
+        "large scale services",
+        "passion",
+        "resilient"
+      ]
+    },
+    {
+      "id": "req_9",
+      "text": "Solid coding and development skills with experience in at least one of the following languages: C#, .Net Core, Java.",
+      "category": "programming_language",
+      "importance": "preferred",
+      "keywords": [
+        ".Net Core",
+        "C#",
+        "Java",
+        "coding skills"
+      ]
+    },
+    {
+      "id": "req_10",
+      "text": "Passionate about solving challenging problems.",
+      "category": "soft_skill",
+      "importance": "preferred",
+      "keywords": [
+        "challenging",
+        "passionate",
+        "solving problems"
+      ]
+    },
+    {
+      "id": "req_11",
+      "text": "Drive to improve performance, availability and supportability of services.",
+      "category": "soft_skill",
+      "importance": "preferred",
+      "keywords": [
+        "availability",
+        "drive",
+        "performance",
+        "supportability"
+      ]
+    },
+    {
+      "id": "req_12",
+      "text": "Drive to increase efficiencies through automation.",
+      "category": "soft_skill",
+      "importance": "preferred",
+      "keywords": [
+        "automation",
+        "drive",
+        "efficiencies"
+      ]
+    }
+  ],
+  "responsibilities": [
+    {
+      "id": "resp_0",
+      "text": "Design, develop, and maintain high-scale services for Microsoft Teams.",
+      "keywords": [
+        "Microsoft Teams",
+        "design",
+        "develop",
+        "high-scale services",
+        "maintain"
+      ]
+    },
+    {
+      "id": "resp_1",
+      "text": "Own and operate services of massive scale and importance.",
+      "keywords": [
+        "importance",
+        "massive scale",
+        "operate",
+        "own"
+      ]
+    },
+    {
+      "id": "resp_2",
+      "text": "Dive deep into Azure technologies and distributed database systems.",
+      "keywords": [
+        "Azure technologies",
+        "distributed database systems",
+        "dive deep"
+      ]
+    },
+    {
+      "id": "resp_3",
+      "text": "Collaborate with partners to design and build features that drive user growth.",
+      "keywords": [
+        "build features",
+        "collaborate",
+        "design features",
+        "partners",
+        "user growth"
+      ]
+    },
+    {
+      "id": "resp_4",
+      "text": "Ensure availability, reliability, performance, and scalability in all development work.",
+      "keywords": [
+        "availability",
+        "development",
+        "performance",
+        "reliability",
+        "scalability"
+      ]
+    },
+    {
+      "id": "resp_5",
+      "text": "Influence and create new designs, architectures, standards, and methods for large-scale distributed systems.",
+      "keywords": [
+        "architectures",
+        "create",
+        "designs",
+        "distributed systems",
+        "influence",
+        "methods",
+        "standards"
+      ]
+    },
+    {
+      "id": "resp_6",
+      "text": "Build reusable libraries of services best practices for other teams.",
+      "keywords": [
+        "best practices",
+        "build",
+        "reusable libraries",
+        "services"
+      ]
+    }
+  ],
+  "keywords": [
+    ".NET Core",
+    "Azure",
+    "Azure Cosmos DB",
+    "Event hubs",
+    "Messaging Services",
+    "Microsoft Teams",
+    "Redis",
+    "backend services",
+    "distributed systems",
+    "microservices",
+    "performance",
+    "reliability",
+    "scalability",
+    "system design"
+  ]
+}

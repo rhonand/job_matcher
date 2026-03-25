@@ -1,0 +1,447 @@
+{
+  "candidate_name": "Anbang Deng, Ph.D.",
+  "contact": {
+    "email": "dengronan@outlook.com",
+    "phone": "365-888-1463",
+    "location": "Toronto, ON",
+    "linkedin": "www.linkedin.com/in/anbang-deng-927377207/",
+    "github": null,
+    "website": null
+  },
+  "summary": "Software Engineer with Ph.D. in ECE, specialized in backend system design, data pipelines, and real-time distributed systems. 6+ years of experience building production-grade software in sponsor-driven projects, including backend services, data processing pipelines, and distributed system integration under real-world constraints.",
+  "raw_skills": [
+    "AWS",
+    "C/C++",
+    "Docker",
+    "FastAPI",
+    "Git",
+    "Node.js",
+    "PostgreSQL",
+    "Python",
+    "RabbitMQ",
+    "React",
+    "TypeScript"
+  ],
+  "inferred_skills": [
+    "Backend Development",
+    "Data Pipelines",
+    "Data Processing",
+    "Distributed Systems",
+    "Event-driven Architecture",
+    "Full-stack Development",
+    "Low-latency Systems",
+    "Real-time Systems",
+    "Signal Processing",
+    "Socket.IO",
+    "State Synchronization",
+    "System Integration",
+    "UAV Systems",
+    "WebSockets"
+  ],
+  "experience": [
+    {
+      "id": "exp_0",
+      "title": "Independent Software Engineer",
+      "organization": null,
+      "location": "Hamilton, ON",
+      "start_date": "Sept 2024",
+      "end_date": "Present",
+      "bullets": [
+        {
+          "id": "exp_0_bullet_0",
+          "text": "Designed and implemented backend services and data processing modules in C++/Python, optimizing for low-latency (-10ms for sensor network) and high-throughput system integration, documented comprehensive technical specifications based on Ph.D. findings.",
+          "technologies": [
+            "C++",
+            "Python"
+          ],
+          "claims": [
+            "Optimized for low-latency (-10ms for sensor network)",
+            "High-throughput system integration",
+            "Documented comprehensive technical specifications"
+          ],
+          "section": "experience"
+        },
+        {
+          "id": "exp_0_bullet_1",
+          "text": "Designed and developed automated pipelines for structured data retrieval and preprocessing to support downstream analytics and machine learning workflows.",
+          "technologies": [
+            "Data Pipelines"
+          ],
+          "claims": [
+            "Designed and developed automated pipelines for structured data retrieval and preprocessing",
+            "Support downstream analytics and machine learning workflows"
+          ],
+          "section": "experience"
+        },
+        {
+          "id": "exp_0_bullet_2",
+          "text": "Added logging/diagnostic hooks to support debugging of real-time failures and performance bottlenecks.",
+          "technologies": [
+            "Diagnostics",
+            "Logging"
+          ],
+          "claims": [
+            "Added logging/diagnostic hooks",
+            "Support debugging of real-time failures",
+            "Support debugging of performance bottlenecks"
+          ],
+          "section": "experience"
+        },
+        {
+          "id": "exp_0_bullet_3",
+          "text": "Built data retrieval & management website software, with monitoring and alerting logic to detect service anomalies, trigger recovery workflows, and improve operational reliability.",
+          "technologies": [
+            "Alerting",
+            "Monitoring",
+            "Web Development"
+          ],
+          "claims": [
+            "Built data retrieval & management website software",
+            "Added monitoring and alerting logic",
+            "Detect service anomalies",
+            "Trigger recovery workflows",
+            "Improve operational reliability"
+          ],
+          "section": "experience"
+        }
+      ]
+    },
+    {
+      "id": "exp_1",
+      "title": "Research Assistant",
+      "organization": "McMaster University",
+      "location": "Hamilton, ON",
+      "start_date": "Sept 2018",
+      "end_date": "June 2024",
+      "bullets": [
+        {
+          "id": "exp_1_bullet_0",
+          "text": "Designed and implemented backend processing pipelines for real-time UAV platforms, handling data flow, state management, and system integration under strict latency constraints",
+          "technologies": [
+            "Backend Processing",
+            "Data Flow",
+            "State Management",
+            "System Integration",
+            "UAV Platforms"
+          ],
+          "claims": [
+            "Designed and implemented backend processing pipelines",
+            "For real-time UAV platforms",
+            "Handling data flow",
+            "Handling state management",
+            "Handling system integration",
+            "Under strict latency constraints"
+          ],
+          "section": "experience"
+        },
+        {
+          "id": "exp_1_bullet_1",
+          "text": "Participated in full software development lifecycle, including requirement analysis, algorithm design, implementation, testing, and system validation, for product-level industrial applications.",
+          "technologies": [
+            "Software Development Lifecycle"
+          ],
+          "claims": [
+            "Participated in full software development lifecycle",
+            "Including requirement analysis",
+            "Algorithm design",
+            "Implementation",
+            "Testing",
+            "System validation",
+            "For product-level industrial applications"
+          ],
+          "section": "experience"
+        },
+        {
+          "id": "exp_1_bullet_2",
+          "text": "Implemented and optimized modular C++ components under real-time constraints, reducing processing latency to below 10 ms.",
+          "technologies": [
+            "C++",
+            "Modular Components"
+          ],
+          "claims": [
+            "Implemented and optimized modular C++ components",
+            "Under real-time constraints",
+            "Reducing processing latency to below 10 ms"
+          ],
+          "section": "experience"
+        },
+        {
+          "id": "exp_1_bullet_3",
+          "text": "Architected full-stack structure to support database management, data analysis and result visualization.",
+          "technologies": [
+            "Data Analysis",
+            "Database Management",
+            "Full-stack Architecture",
+            "Visualization"
+          ],
+          "claims": [
+            "Architected full-stack structure",
+            "To support database management",
+            "Data analysis",
+            "Result visualization"
+          ],
+          "section": "experience"
+        }
+      ]
+    },
+    {
+      "id": "exp_2",
+      "title": "Software Developer",
+      "organization": "Uhnder Inc.",
+      "location": "Toronto, ON",
+      "start_date": "May 2022",
+      "end_date": "Aug 2022",
+      "bullets": [
+        {
+          "id": "exp_2_bullet_0",
+          "text": "Developed and optimized vehicle-mounted radar signal processing algorithms in C++.",
+          "technologies": [
+            "Algorithms",
+            "C++",
+            "Radar Signal Processing"
+          ],
+          "claims": [
+            "Developed and optimized vehicle-mounted radar signal processing algorithms",
+            "In C++"
+          ],
+          "section": "experience"
+        },
+        {
+          "id": "exp_2_bullet_1",
+          "text": "Contributed to debugging, benchmarking, and reliability improvements for real-time processing pipelines.",
+          "technologies": [
+            "Benchmarking",
+            "Debugging",
+            "Real-time Processing Pipelines",
+            "Reliability"
+          ],
+          "claims": [
+            "Contributed to debugging",
+            "Benchmarking",
+            "Reliability improvements",
+            "For real-time processing pipelines"
+          ],
+          "section": "experience"
+        },
+        {
+          "id": "exp_2_bullet_2",
+          "text": "Participated in collaborative development workflows including Git-based version control and code reviews.",
+          "technologies": [
+            "Code Reviews",
+            "Git",
+            "Version Control"
+          ],
+          "claims": [
+            "Participated in collaborative development workflows",
+            "Including Git-based version control",
+            "Code reviews"
+          ],
+          "section": "experience"
+        }
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "id": "proj_0",
+      "name": "PCRLB-based Adaptive Motion Planning and Resource Management",
+      "role": "Ph.D. thesis",
+      "start_date": "Sept 2018",
+      "end_date": "Dec 2023",
+      "bullets": [
+        {
+          "id": "proj_0_bullet_0",
+          "text": "Developed perception and tracking methods for environment recognition in autonomous UAV navigation.",
+          "technologies": [
+            "Environment Recognition",
+            "Perception",
+            "Tracking",
+            "UAV Navigation"
+          ],
+          "claims": [
+            "Developed perception and tracking methods",
+            "For environment recognition",
+            "In autonomous UAV navigation"
+          ],
+          "section": "project"
+        },
+        {
+          "id": "proj_0_bullet_1",
+          "text": "Designed algorithms based on newly proposed concept for motion planning and system scheduling, improving information gain by 15%.",
+          "technologies": [
+            "Algorithms",
+            "Motion Planning",
+            "System Scheduling"
+          ],
+          "claims": [
+            "Designed algorithms based on newly proposed concept",
+            "For motion planning and system scheduling",
+            "Improving information gain by 15%"
+          ],
+          "section": "project"
+        },
+        {
+          "id": "proj_0_bullet_2",
+          "text": "Implemented backend components in C++, optimized data processing and inference pipelines to support real-time perception workloads, employed algorithms for real-time industrial applications.",
+          "technologies": [
+            "Backend Components",
+            "C++",
+            "Data Processing",
+            "Inference Pipelines",
+            "Real-time Perception"
+          ],
+          "claims": [
+            "Implemented backend components in C++",
+            "Optimized data processing and inference pipelines",
+            "To support real-time perception workloads",
+            "Employed algorithms for real-time industrial applications"
+          ],
+          "section": "project"
+        }
+      ]
+    },
+    {
+      "id": "proj_1",
+      "name": "Terrain-aware UAV Navigation & Environment Recognition",
+      "role": "Team lead",
+      "start_date": "Sept 2019",
+      "end_date": "Aug 2020",
+      "bullets": [
+        {
+          "id": "proj_1_bullet_0",
+          "text": "Developed perception algorithm for terrain and environment recognition in autonomous UAV navigation systems.",
+          "technologies": [
+            "Environment Recognition",
+            "Perception Algorithm",
+            "Terrain Recognition",
+            "UAV Navigation"
+          ],
+          "claims": [
+            "Developed perception algorithm",
+            "For terrain and environment recognition",
+            "In autonomous UAV navigation systems"
+          ],
+          "section": "project"
+        },
+        {
+          "id": "proj_1_bullet_1",
+          "text": "Architected an execution framework that scaled across 4+ centers and 10+ UAVs.",
+          "technologies": [
+            "Execution Framework",
+            "Scalability"
+          ],
+          "claims": [
+            "Architected an execution framework",
+            "That scaled across 4+ centers",
+            "10+ UAVs"
+          ],
+          "section": "project"
+        },
+        {
+          "id": "proj_1_bullet_2",
+          "text": "Implemented software execution pipelines, data preprocessing, and evaluation workflows for large-scale sensor datasets.",
+          "technologies": [
+            "Data Preprocessing",
+            "Evaluation Workflows",
+            "Sensor Datasets",
+            "Software Execution Pipelines"
+          ],
+          "claims": [
+            "Implemented software execution pipelines",
+            "Data preprocessing",
+            "Evaluation workflows",
+            "For large-scale sensor datasets"
+          ],
+          "section": "project"
+        }
+      ]
+    },
+    {
+      "id": "proj_2",
+      "name": "Full-Stack Multi-User Communication Platform Engine",
+      "role": "Independent Public Project",
+      "start_date": "Jan 2025",
+      "end_date": "Dec 2025",
+      "bullets": [
+        {
+          "id": "proj_2_bullet_0",
+          "text": "Developed a full-stack multi-user software platform that can be used as a base to multi-player games or user data management.",
+          "technologies": [
+            "Data Management",
+            "Full-stack Development",
+            "Game Development",
+            "Multi-user Platform"
+          ],
+          "claims": [
+            "Developed a full-stack multi-user software platform",
+            "That can be used as a base to multi-player games",
+            "User data management"
+          ],
+          "section": "project"
+        },
+        {
+          "id": "proj_2_bullet_1",
+          "text": "Implemented real-time client-server communication using WebSockets (Socket.IO), with scalable state synchronization and event-driven message handling for concurrent multi-user sessions.",
+          "technologies": [
+            "Client-server Communication",
+            "Event-driven Architecture",
+            "Socket.IO",
+            "State Synchronization",
+            "WebSockets"
+          ],
+          "claims": [
+            "Implemented real-time client-server communication",
+            "Using WebSockets (Socket.IO)",
+            "With scalable state synchronization",
+            "Event-driven message handling",
+            "For concurrent multi-user sessions"
+          ],
+          "section": "project"
+        },
+        {
+          "id": "proj_2_bullet_2",
+          "text": "Designed modular communication flows and failure-handling logic to improve session consistency and service robustness under reconnect and partial failure scenarios.",
+          "technologies": [
+            "Failure Handling",
+            "Modular Communication",
+            "Service Robustness",
+            "Session Consistency"
+          ],
+          "claims": [
+            "Designed modular communication flows",
+            "Failure-handling logic",
+            "To improve session consistency",
+            "Service robustness",
+            "Under reconnect and partial failure scenarios"
+          ],
+          "section": "project"
+        }
+      ]
+    }
+  ],
+  "education": [
+    {
+      "degree": "Ph.D.",
+      "field_of_study": "Electrical and Computer Engineering",
+      "institution": "McMaster University",
+      "start_date": "Sept 2018",
+      "end_date": "Jun 2024"
+    },
+    {
+      "degree": "M.Sc.",
+      "field_of_study": "Electrical and Computer Engineering",
+      "institution": "Western University",
+      "start_date": "Sept 2016",
+      "end_date": "Dec 2017"
+    },
+    {
+      "degree": "B.Eng.",
+      "field_of_study": "Electrical Engineering and Automation",
+      "institution": "Hohai University",
+      "start_date": "Sept 2011",
+      "end_date": "Apr 2015"
+    }
+  ],
+  "certifications": [],
+  "languages": []
+}
