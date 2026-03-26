@@ -71,6 +71,8 @@ class LLMClient:
                     }
                 ],
             )
+            print("[LLM] response received.")
+            
             content = response.choices[0].message.content
             if not content:
                 raise LLMClientError("Model returned empty content.")

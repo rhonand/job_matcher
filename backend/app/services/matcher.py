@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import re
 from dataclasses import dataclass
-from typing import Iterable, List, Set
+from typing import Iterable, List, Optional, Set
 
 from backend.app.schemas.jd_schema import JDSchema, JDRequirement
 from backend.app.schemas.score_schema import (
@@ -12,6 +12,7 @@ from backend.app.schemas.score_schema import (
     RequirementMatchResult,
 )
 from backend.app.schemas.resume_schema import ResumeBullet, ResumeSchema
+from backend.app.services.embedding_matcher import EmbeddingMatcher
 
 
 def normalize_text(text: str) -> str:
@@ -78,27 +79,29 @@ def build_resume_text_corpus(resume: ResumeSchema) -> str:
         parts.extend(bullet.technologies)
         parts.extend(bullet.claims)
 
+    for edu in resume.education:
+        for part in [edu.degree, edu.field_of_study, edu.institution]:
+            if part:
+                parts.append(part)
+
     return normalize_text(" \n ".join(parts))
 
 
-def tokenize_keywords(requirement: JDRequirement) -> List[str]:
-    keywords = unique_preserve_order(requirement.keywords + [requirement.text])
-    return [normalize_token(k) for k in keywords if normalize_token(k)]
+def tokenize_requirement(req: JDRequirement) -> List[str]:
+    parts = [req.text] + req.keywords
+    return unique_preserve_order(
+        [normalize_token(p) for p in parts if normalize_token(p)]
+    )
 
 
 def keyword_in_text(keyword: str, text: str) -> bool:
-    """
-    Conservative substring/word-ish match.
-    """
     if not keyword:
         return False
 
-    # Exact-ish boundary match first
     pattern = rf"(?<!\w){re.escape(keyword)}(?!\w)"
     if re.search(pattern, text):
         return True
 
-    # Fallback substring
     return keyword in text
 
 
@@ -106,7 +109,6 @@ def keyword_in_skill_set(keyword: str, skill_set: Set[str]) -> bool:
     if keyword in skill_set:
         return True
 
-    # Loose containment either way
     for skill in skill_set:
         if keyword in skill or skill in keyword:
             return True
@@ -124,61 +126,76 @@ def requirement_weight(importance: str) -> float:
 @dataclass
 class RequirementEvaluation:
     matched_by_skill: bool
-    matched_by_text: bool
+    matched_by_keyword: bool
+    ats_matched: bool
+
+    matched_by_semantics: bool
+    semantic_score: float
+
     matched_keywords: List[str]
     missing_keywords: List[str]
     evidence_bullets: List[ResumeBullet]
 
 
 class Matcher:
-    def __init__(self) -> None:
-        pass
+    def __init__(
+        self,
+        embedding_matcher: Optional[EmbeddingMatcher] = None,
+        semantic_threshold: float = 0.45,
+        semantic_evidence_threshold: float = 0.35,
+    ) -> None:
+        self.embedding_matcher = embedding_matcher
+        self.semantic_threshold = semantic_threshold
+        self.semantic_evidence_threshold = semantic_evidence_threshold
 
     def match(self, resume: ResumeSchema, jd: JDSchema) -> AnalysisReportSchema:
-        resume_skill_strings = collect_resume_skill_strings(resume)
         resume_skill_set = build_resume_skill_set(resume)
         resume_text_corpus = build_resume_text_corpus(resume)
         resume_bullets = flatten_resume_bullets(resume)
 
         requirement_matches: List[RequirementMatchResult] = []
 
-        matched_skill_names: List[str] = []
-        missing_skill_names: List[str] = []
+        matched_skills: List[str] = []
+        missing_skills: List[str] = []
         matched_keywords_global: List[str] = []
         missing_keywords_global: List[str] = []
         strongest_evidence_bullets: List[str] = []
 
-        weighted_requirement_score = 0.0
-        total_requirement_weight = 0.0
-
+        weighted_skill_hits = 0.0
         weighted_keyword_hits = 0.0
         weighted_keyword_total = 0.0
+        weighted_requirement_total = 0.0
 
-        responsibility_coverage_hits = 0.0
+        weighted_requirement_semantic_sum = 0.0
+        weighted_responsibility_semantic_sum = 0.0
+        weighted_responsibility_keyword_hits = 0.0
 
         for req in jd.requirements:
             evaluation = self._evaluate_requirement(
                 req=req,
+                resume=resume,
                 resume_skill_set=resume_skill_set,
                 resume_text_corpus=resume_text_corpus,
                 resume_bullets=resume_bullets,
             )
 
             weight = requirement_weight(req.importance)
-            total_requirement_weight += weight
+            weighted_requirement_total += weight
 
-            matched = evaluation.matched_by_skill or evaluation.matched_by_text
-            if matched:
-                weighted_requirement_score += weight
+            if evaluation.matched_by_skill:
+                weighted_skill_hits += weight
 
             weighted_keyword_hits += weight * len(evaluation.matched_keywords)
             weighted_keyword_total += weight * max(
-                len(evaluation.matched_keywords) + len(evaluation.missing_keywords), 1
+                len(evaluation.matched_keywords) + len(evaluation.missing_keywords),
+                1,
             )
+
+            weighted_requirement_semantic_sum += weight * evaluation.semantic_score
 
             evidence = MatchEvidence(
                 requirement_id=req.id,
-                matched=matched,
+                matched=evaluation.ats_matched or evaluation.matched_by_semantics,
                 confidence=self._estimate_confidence(evaluation),
                 evidence_bullet_ids=[b.id for b in evaluation.evidence_bullets],
                 evidence_texts=[b.text for b in evaluation.evidence_bullets],
@@ -191,30 +208,42 @@ class Matcher:
                     requirement_text=req.text,
                     importance=req.importance,
                     matched_by_skill=evaluation.matched_by_skill,
-                    matched_by_semantics=evaluation.matched_by_text,
+                    matched_by_keyword=evaluation.matched_by_keyword,
+                    ats_matched=evaluation.ats_matched,
+                    matched_by_semantics=evaluation.matched_by_semantics,
+                    semantic_score=round(evaluation.semantic_score, 4),
                     matched_keywords=evaluation.matched_keywords,
                     missing_keywords=evaluation.missing_keywords,
                     evidence=evidence,
                 )
             )
 
-            if matched:
-                matched_skill_names.append(req.text)
+            if evaluation.ats_matched:
+                matched_skills.append(req.text)
             else:
-                missing_skill_names.append(req.text)
+                missing_skills.append(req.text)
 
             matched_keywords_global.extend(evaluation.matched_keywords)
             missing_keywords_global.extend(evaluation.missing_keywords)
             strongest_evidence_bullets.extend([b.text for b in evaluation.evidence_bullets])
 
-        # Very rough responsibility coverage:
+        # Responsibility scores
         for resp in jd.responsibilities:
-            if self._responsibility_has_evidence(resp.text, resume_bullets, resume_text_corpus):
-                responsibility_coverage_hits += 1.0
+            kw_hit = self._responsibility_keyword_match(resp.text, resume_text_corpus, resume_bullets)
+            if kw_hit:
+                weighted_responsibility_keyword_hits += 1.0
+
+            if self.embedding_matcher is not None and resume_bullets:
+                score = self.embedding_matcher.best_match_score(resp.text, resume_bullets)
+                weighted_responsibility_semantic_sum += score
+            else:
+                weighted_responsibility_semantic_sum += 0.0
+
+        num_responsibilities = len(jd.responsibilities)
 
         skill_coverage_score = (
-            weighted_requirement_score / total_requirement_weight
-            if total_requirement_weight > 0
+            weighted_skill_hits / weighted_requirement_total
+            if weighted_requirement_total > 0
             else 0.0
         )
 
@@ -224,47 +253,67 @@ class Matcher:
             else 0.0
         )
 
-        responsibility_coverage_score = (
-            responsibility_coverage_hits / len(jd.responsibilities)
-            if jd.responsibilities
+        responsibility_keyword_score = (
+            weighted_responsibility_keyword_hits / num_responsibilities
+            if num_responsibilities > 0
             else 0.0
         )
 
-        # Placeholder for future embedding-based score
-        semantic_similarity_score = responsibility_coverage_score
-
-        overall_score = (
-            0.4 * skill_coverage_score
-            + 0.25 * keyword_alignment_score
-            + 0.20 * semantic_similarity_score
-            + 0.15 * responsibility_coverage_score
+        ats_like_score = (
+            0.45 * skill_coverage_score
+            + 0.35 * keyword_alignment_score
+            + 0.20 * responsibility_keyword_score
         )
+
+        requirement_semantic_score = (
+            weighted_requirement_semantic_sum / weighted_requirement_total
+            if weighted_requirement_total > 0
+            else 0.0
+        )
+
+        responsibility_semantic_score = (
+            weighted_responsibility_semantic_sum / num_responsibilities
+            if num_responsibilities > 0
+            else 0.0
+        )
+
+        semantic_score = (
+            0.70 * requirement_semantic_score
+            + 0.30 * responsibility_semantic_score
+        )
+
+        blended_score = (
+            0.55 * ats_like_score
+            + 0.45 * semantic_score
+        )
+
+        semantic_gap = semantic_score - ats_like_score
 
         scores = MatchScores(
             skill_coverage_score=round(skill_coverage_score, 4),
             keyword_alignment_score=round(keyword_alignment_score, 4),
-            semantic_similarity_score=round(semantic_similarity_score, 4),
-            responsibility_coverage_score=round(responsibility_coverage_score, 4),
-            overall_score=round(overall_score, 4),
+            responsibility_keyword_score=round(responsibility_keyword_score, 4),
+            ats_like_score=round(ats_like_score, 4),
+            requirement_semantic_score=round(requirement_semantic_score, 4),
+            responsibility_semantic_score=round(responsibility_semantic_score, 4),
+            semantic_score=round(semantic_score, 4),
+            blended_score=round(blended_score, 4),
+            semantic_gap=round(semantic_gap, 4),
         )
 
         report = AnalysisReportSchema(
             candidate_name=resume.candidate_name,
             job_title=jd.job_title,
             company_name=jd.company_name,
-            matched_skills=unique_preserve_order(matched_skill_names),
-            missing_skills=unique_preserve_order(missing_skill_names),
+            matched_skills=unique_preserve_order(matched_skills),
+            missing_skills=unique_preserve_order(missing_skills),
             matched_keywords=unique_preserve_order(matched_keywords_global),
             missing_keywords=unique_preserve_order(missing_keywords_global),
             scores=scores,
             requirement_matches=requirement_matches,
             priority_gaps=self._build_priority_gaps(requirement_matches),
             strongest_evidence_bullets=unique_preserve_order(strongest_evidence_bullets)[:5],
-            overall_assessment=self._build_overall_assessment(
-                scores=scores,
-                matched_skills=unique_preserve_order(matched_skill_names),
-                missing_skills=unique_preserve_order(missing_skill_names),
-            ),
+            overall_assessment=self._build_overall_assessment(scores),
         )
 
         return report
@@ -272,25 +321,34 @@ class Matcher:
     def _evaluate_requirement(
         self,
         req: JDRequirement,
+        resume: ResumeSchema,
         resume_skill_set: Set[str],
         resume_text_corpus: str,
         resume_bullets: List[ResumeBullet],
     ) -> RequirementEvaluation:
-        normalized_req_text = normalize_token(req.text)
-        candidate_keywords = tokenize_keywords(req)
+        if self._looks_like_degree_requirement(req.text):
+            degree_ok = self._resume_has_degree_equivalent(resume, req.text)
+            evidence_bullets: List[ResumeBullet] = []
+            return RequirementEvaluation(
+                matched_by_skill=degree_ok,
+                matched_by_keyword=degree_ok,
+                ats_matched=degree_ok,
+                matched_by_semantics=degree_ok,
+                semantic_score=1.0 if degree_ok else 0.0,
+                matched_keywords=["degree_requirement"] if degree_ok else [],
+                missing_keywords=[] if degree_ok else ["degree_requirement"],
+                evidence_bullets=evidence_bullets,
+            )
 
-        if normalized_req_text and normalized_req_text not in candidate_keywords:
-            candidate_keywords = [normalized_req_text] + candidate_keywords
-
-        candidate_keywords = unique_preserve_order(candidate_keywords)
+        keywords = tokenize_requirement(req)
 
         matched_keywords: List[str] = []
         missing_keywords: List[str] = []
 
         matched_by_skill = False
-        matched_by_text = False
+        matched_by_keyword = False
 
-        for kw in candidate_keywords:
+        for kw in keywords:
             in_skills = keyword_in_skill_set(kw, resume_skill_set)
             in_text = keyword_in_text(kw, resume_text_corpus)
 
@@ -300,23 +358,46 @@ class Matcher:
                 missing_keywords.append(kw)
 
             matched_by_skill = matched_by_skill or in_skills
-            matched_by_text = matched_by_text or in_text
+            matched_by_keyword = matched_by_keyword or in_text
 
-        evidence_bullets = self._find_evidence_bullets(candidate_keywords, resume_bullets)
+        ats_matched = matched_by_skill or matched_by_keyword
 
-        # If there are good evidence bullets, treat that as text match support
-        if evidence_bullets:
-            matched_by_text = True
+        keyword_evidence = self._find_keyword_evidence_bullets(keywords, resume_bullets)
+
+        semantic_score = 0.0
+        matched_by_semantics = False
+        semantic_evidence: List[ResumeBullet] = []
+
+        if self.embedding_matcher is not None and resume_bullets:
+            top_matches = self.embedding_matcher.top_k_bullet_matches(
+                query_text=req.text,
+                bullets=resume_bullets,
+                top_k=3,
+            )
+
+            if top_matches:
+                semantic_score = top_matches[0].score
+                matched_by_semantics = semantic_score >= self.semantic_threshold
+
+                bullet_map = {b.id: b for b in resume_bullets}
+                for match in top_matches:
+                    if match.score >= self.semantic_evidence_threshold and match.bullet_id in bullet_map:
+                        semantic_evidence.append(bullet_map[match.bullet_id])
+
+        combined_evidence = self._merge_bullets(keyword_evidence, semantic_evidence, top_k=3)
 
         return RequirementEvaluation(
             matched_by_skill=matched_by_skill,
-            matched_by_text=matched_by_text,
+            matched_by_keyword=matched_by_keyword,
+            ats_matched=ats_matched,
+            matched_by_semantics=matched_by_semantics,
+            semantic_score=semantic_score,
             matched_keywords=matched_keywords,
             missing_keywords=missing_keywords,
-            evidence_bullets=evidence_bullets,
+            evidence_bullets=combined_evidence,
         )
 
-    def _find_evidence_bullets(
+    def _find_keyword_evidence_bullets(
         self,
         keywords: List[str],
         resume_bullets: List[ResumeBullet],
@@ -326,27 +407,39 @@ class Matcher:
 
         for bullet in resume_bullets:
             bullet_text = normalize_text(
-                " ".join(
-                    [bullet.text] + bullet.technologies + bullet.claims
-                )
+                " ".join([bullet.text] + bullet.technologies + bullet.claims)
             )
             score = 0
-
             for kw in keywords:
                 if keyword_in_text(kw, bullet_text):
                     score += 1
-
             if score > 0:
                 scored.append((score, bullet))
 
         scored.sort(key=lambda x: x[0], reverse=True)
         return [bullet for _, bullet in scored[:top_k]]
 
-    def _responsibility_has_evidence(
+    def _merge_bullets(
+        self,
+        bullets_a: List[ResumeBullet],
+        bullets_b: List[ResumeBullet],
+        top_k: int = 3,
+    ) -> List[ResumeBullet]:
+        seen = set()
+        merged = []
+
+        for bullet in bullets_a + bullets_b:
+            if bullet.id not in seen:
+                seen.add(bullet.id)
+                merged.append(bullet)
+
+        return merged[:top_k]
+
+    def _responsibility_keyword_match(
         self,
         responsibility_text: str,
-        resume_bullets: List[ResumeBullet],
         resume_text_corpus: str,
+        resume_bullets: List[ResumeBullet],
     ) -> bool:
         normalized_resp = normalize_token(responsibility_text)
         if not normalized_resp:
@@ -355,88 +448,111 @@ class Matcher:
         if keyword_in_text(normalized_resp, resume_text_corpus):
             return True
 
-        # Weak heuristic: enough token overlap with any bullet
-        resp_tokens = {
-            tok for tok in normalized_resp.split()
-            if len(tok) > 3
-        }
-
+        resp_tokens = {tok for tok in normalized_resp.split() if len(tok) > 3}
         for bullet in resume_bullets:
             bullet_text = normalize_text(
-                " ".join(
-                    [bullet.text] + bullet.technologies + bullet.claims
-                )
+                " ".join([bullet.text] + bullet.technologies + bullet.claims)
             )
             bullet_tokens = set(bullet_text.split())
-            overlap = len(resp_tokens & bullet_tokens)
-            if overlap >= 2:
+            if len(resp_tokens & bullet_tokens) >= 2:
                 return True
+
+        return False
+
+    def _looks_like_degree_requirement(self, text: str) -> bool:
+        t = text.lower()
+        return any(x in t for x in ["bachelor", "master", "phd", "doctorate", "degree"])
+
+    def _resume_has_degree_equivalent(self, resume: ResumeSchema, requirement_text: str) -> bool:
+        req = requirement_text.lower()
+
+        education_parts = []
+        for edu in resume.education:
+            for part in [edu.degree, edu.field_of_study, edu.institution]:
+                if part:
+                    education_parts.append(part.lower())
+
+        joined = " ".join(education_parts)
+
+        if "bachelor" in req:
+            return any(x in joined for x in ["bachelor", "master", "phd", "doctor"])
+        if "master" in req:
+            return any(x in joined for x in ["master", "phd", "doctor"])
+        if "phd" in req or "doctor" in req:
+            return any(x in joined for x in ["phd", "doctor"])
+
+        if "degree" in req:
+            return any(x in joined for x in ["bachelor", "master", "phd", "doctor"])
 
         return False
 
     def _estimate_confidence(self, evaluation: RequirementEvaluation) -> float:
         score = 0.0
         if evaluation.matched_by_skill:
-            score += 0.45
-        if evaluation.matched_by_text:
-            score += 0.35
-        score += min(len(evaluation.matched_keywords) * 0.08, 0.2)
+            score += 0.30
+        if evaluation.matched_by_keyword:
+            score += 0.25
+        if evaluation.matched_by_semantics:
+            score += 0.30
+        score += min(len(evaluation.matched_keywords) * 0.05, 0.15)
         return round(min(score, 1.0), 3)
 
-    def _build_rationale(
-        self,
-        req: JDRequirement,
-        evaluation: RequirementEvaluation,
-    ) -> str:
-        if evaluation.evidence_bullets:
+    def _build_rationale(self, req: JDRequirement, evaluation: RequirementEvaluation) -> str:
+        if evaluation.ats_matched and evaluation.matched_by_semantics:
             return (
-                f"Requirement '{req.text}' is supported by matching resume content "
-                f"and {len(evaluation.evidence_bullets)} relevant bullet(s)."
+                f"Requirement '{req.text}' is supported by both ATS-style lexical evidence "
+                f"and semantic similarity to resume bullets."
             )
-
-        if evaluation.matched_by_skill:
+        if evaluation.ats_matched:
             return (
-                f"Requirement '{req.text}' appears supported by the extracted resume skill set."
+                f"Requirement '{req.text}' is supported mainly by explicit lexical/keyword evidence."
             )
-
-        return f"Requirement '{req.text}' has weak or missing direct evidence in the resume."
+        if evaluation.matched_by_semantics:
+            return (
+                f"Requirement '{req.text}' is weak in explicit keywords but supported semantically by resume content."
+            )
+        return f"Requirement '{req.text}' has weak direct evidence in the resume."
 
     def _build_priority_gaps(
         self,
         requirement_matches: List[RequirementMatchResult],
     ) -> List[str]:
         gaps = []
+
         for item in requirement_matches:
-            if item.importance == "required" and not (
-                item.matched_by_skill or item.matched_by_semantics
-            ):
+            if item.importance == "required" and not item.ats_matched:
                 gaps.append(item.requirement_text)
 
         if not gaps:
             for item in requirement_matches:
-                if item.importance in {"required", "preferred"} and item.missing_keywords:
+                if item.importance in {"required", "preferred"} and not (
+                    item.ats_matched or item.matched_by_semantics
+                ):
                     gaps.append(item.requirement_text)
 
         return unique_preserve_order(gaps)[:5]
 
-    def _build_overall_assessment(
-        self,
-        scores: MatchScores,
-        matched_skills: List[str],
-        missing_skills: List[str],
-    ) -> str:
-        if scores.overall_score >= 0.75:
+    def _build_overall_assessment(self, scores: MatchScores) -> str:
+        if scores.blended_score >= 0.75:
             level = "strong"
-        elif scores.overall_score >= 0.5:
+        elif scores.blended_score >= 0.50:
             level = "moderate"
         else:
             level = "limited"
 
-        matched_preview = ", ".join(matched_skills[:5]) if matched_skills else "no strong requirement matches"
-        missing_preview = ", ".join(missing_skills[:5]) if missing_skills else "no major missing requirements identified"
+        if scores.semantic_gap >= 0.15:
+            gap_comment = (
+                "Semantic alignment is noticeably stronger than ATS-style lexical alignment, "
+                "suggesting the resume may undersell relevant experience in keyword terms."
+            )
+        elif scores.semantic_gap <= -0.15:
+            gap_comment = (
+                "Lexical alignment appears stronger than semantic alignment, suggesting the resume uses relevant wording "
+                "but the underlying evidence may be weaker."
+            )
+        else:
+            gap_comment = (
+                "ATS-style and semantic alignment are broadly consistent."
+            )
 
-        return (
-            f"Overall alignment appears {level}. "
-            f"Strongest overlap: {matched_preview}. "
-            f"Primary gaps: {missing_preview}."
-        )
+        return f"Overall alignment appears {level}. {gap_comment}"

@@ -1,184 +1,154 @@
 {
-  "candidate_name": "Anbang Deng, Ph.D.",
+  "candidate_name": "Anbang Deng",
   "job_title": "Software Development Engineer",
   "company_name": "Microsoft",
   "matched_skills": [
-    "Proven experience coding in languages including, but not limited to, C, C++, C#, Java, JavaScript, or Python.",
-    "Experience working on large-scale distributed systems, client-server architectures, and distributed database systems.",
-    "Excellent cross group collaboration, negotiation and communication skills.",
-    "Drive to improve performance, availability and supportability of services.",
-    "Drive to increase efficiencies through automation."
+    "Bachelor's Degree in Computer Science or related technical discipline",
+    "Proven experience coding in languages including C#, Java, JavaScript, or Python",
+    "Experience working with distributed database systems",
+    "Excellent cross group collaboration, negotiation and communication skills"
   ],
   "missing_skills": [
-    "Bachelor's Degree in Computer Science or related technical discipline OR equivalent experience.",
-    "Master's Degree in Computer Science or related technical field OR Bachelor's Degree with 2+ years technical engineering experience.",
-    "Experience working with Service Fabric or Kubernetes.",
-    "Ability to deal with the ambiguity associated with working in a fast-paced and changing environment.",
-    "Experience working with M365 components like AAD, Exchange, Substrate, SharePoint.",
-    "Solid passion for delivering high-quality, resilient, large scale services.",
-    "Solid coding and development skills with experience in at least one of the following languages: C#, .Net Core, Java.",
-    "Passionate about solving challenging problems."
+    "Experience working with Azure technologies"
   ],
   "matched_keywords": [
-    "c",
-    "c++",
+    "degree_requirement",
+    "proven experience coding in languages including c# java javascript or python",
     "python",
-    "proven experience coding in languages including but not limited to c c++ c# java javascript or python.",
-    "large-scale distributed systems",
-    "experience working on large-scale distributed systems client-server architectures and distributed database systems.",
-    "communication",
-    "drive",
-    "performance"
+    "database",
+    "distributed",
+    "communication"
   ],
   "missing_keywords": [
-    "bachelor s degree",
-    "computer science",
-    "equivalent experience",
-    "bachelor s degree in computer science or related technical discipline or equivalent experience.",
     "c#",
     "java",
     "javascript",
-    "coding experience",
-    "2+ years experience",
-    "master s degree",
-    "technical engineering",
-    "master s degree in computer science or related technical field or bachelor s degree with 2+ years technical engineering experience.",
-    "kubernetes",
-    "service fabric",
-    "experience working with service fabric or kubernetes.",
-    "client-server architectures",
-    "distributed database systems",
+    "coding",
+    "experience working with distributed database systems",
+    "cosmos db",
+    "experience working with azure technologies",
+    "azure",
+    "cloud",
+    "excellent cross group collaboration negotiation and communication skills",
     "collaboration",
-    "negotiation",
-    "excellent cross group collaboration negotiation and communication skills.",
-    "ambiguity",
-    "changing environment",
-    "fast-paced",
-    "ability to deal with the ambiguity associated with working in a fast-paced and changing environment.",
-    "aad",
-    "exchange",
-    "m365",
-    "sharepoint",
-    "substrate",
-    "experience working with m365 components like aad exchange substrate sharepoint.",
-    "high-quality",
-    "large scale services",
-    "passion",
-    "resilient",
-    "solid passion for delivering high-quality resilient large scale services.",
-    ".net core",
-    "coding skills",
-    "solid coding and development skills with experience in at least one of the following languages c# .net core java.",
-    "challenging",
-    "passionate",
-    "solving problems",
-    "passionate about solving challenging problems.",
-    "availability",
-    "supportability",
-    "drive to improve performance availability and supportability of services.",
-    "automation",
-    "efficiencies",
-    "drive to increase efficiencies through automation."
+    "negotiation"
   ],
   "scores": {
-    "skill_coverage_score": 0.3953,
-    "keyword_alignment_score": 0.1836,
-    "semantic_similarity_score": 0.2857,
-    "responsibility_coverage_score": 0.2857,
-    "overall_score": 0.304
+    "skill_coverage_score": 0.6,
+    "keyword_alignment_score": 0.3333,
+    "responsibility_keyword_score": 0.0,
+    "ats_like_score": 0.3867,
+    "requirement_semantic_score": 0.4564,
+    "responsibility_semantic_score": 0.3789,
+    "semantic_score": 0.4332,
+    "blended_score": 0.4076,
+    "semantic_gap": 0.0465
   },
   "requirement_matches": [
     {
       "requirement_id": "req_0",
-      "requirement_text": "Bachelor's Degree in Computer Science or related technical discipline OR equivalent experience.",
+      "requirement_text": "Bachelor's Degree in Computer Science or related technical discipline",
       "importance": "required",
-      "matched_by_skill": false,
-      "matched_by_semantics": false,
-      "matched_keywords": [],
-      "missing_keywords": [
-        "bachelor s degree",
-        "computer science",
-        "equivalent experience",
-        "bachelor s degree in computer science or related technical discipline or equivalent experience."
+      "matched_by_skill": true,
+      "matched_by_keyword": true,
+      "ats_matched": true,
+      "matched_by_semantics": true,
+      "semantic_score": 1.0,
+      "matched_keywords": [
+        "degree_requirement"
       ],
+      "missing_keywords": [],
       "evidence": {
         "requirement_id": "req_0",
-        "matched": false,
-        "confidence": 0.0,
+        "matched": true,
+        "confidence": 0.9,
         "evidence_bullet_ids": [],
         "evidence_texts": [],
-        "rationale": "Requirement 'Bachelor's Degree in Computer Science or related technical discipline OR equivalent experience.' has weak or missing direct evidence in the resume."
+        "rationale": "Requirement 'Bachelor's Degree in Computer Science or related technical discipline' is supported by both ATS-style lexical evidence and semantic similarity to resume bullets."
       }
     },
     {
       "requirement_id": "req_1",
-      "requirement_text": "Proven experience coding in languages including, but not limited to, C, C++, C#, Java, JavaScript, or Python.",
+      "requirement_text": "Proven experience coding in languages including C#, Java, JavaScript, or Python",
       "importance": "required",
       "matched_by_skill": true,
-      "matched_by_semantics": true,
+      "matched_by_keyword": true,
+      "ats_matched": true,
+      "matched_by_semantics": false,
+      "semantic_score": 0.3147,
       "matched_keywords": [
-        "c",
-        "c++",
-        "python",
-        "proven experience coding in languages including but not limited to c c++ c# java javascript or python."
+        "proven experience coding in languages including c# java javascript or python",
+        "python"
       ],
       "missing_keywords": [
         "c#",
         "java",
         "javascript",
-        "coding experience"
+        "coding"
       ],
       "evidence": {
         "requirement_id": "req_1",
         "matched": true,
-        "confidence": 1.0,
+        "confidence": 0.65,
         "evidence_bullet_ids": [
           "exp_0_bullet_0",
-          "exp_1_bullet_2",
-          "exp_2_bullet_0"
+          "exp_0_bullet_1"
         ],
         "evidence_texts": [
           "Designed and implemented backend services and data processing modules in C++/Python, optimizing for low-latency (-10ms for sensor network) and high-throughput system integration, documented comprehensive technical specifications based on Ph.D. findings.",
-          "Implemented and optimized modular C++ components under real-time constraints, reducing processing latency to below 10 ms.",
-          "Developed and optimized vehicle-mounted radar signal processing algorithms in C++."
+          "Designed and developed automated pipelines for structured data retrieval and preprocessing to support downstream analytics and machine learning workflows."
         ],
-        "rationale": "Requirement 'Proven experience coding in languages including, but not limited to, C, C++, C#, Java, JavaScript, or Python.' is supported by matching resume content and 3 relevant bullet(s)."
+        "rationale": "Requirement 'Proven experience coding in languages including C#, Java, JavaScript, or Python' is supported mainly by explicit lexical/keyword evidence."
       }
     },
     {
       "requirement_id": "req_2",
-      "requirement_text": "Master's Degree in Computer Science or related technical field OR Bachelor's Degree with 2+ years technical engineering experience.",
-      "importance": "preferred",
-      "matched_by_skill": false,
+      "requirement_text": "Experience working with distributed database systems",
+      "importance": "required",
+      "matched_by_skill": true,
+      "matched_by_keyword": true,
+      "ats_matched": true,
       "matched_by_semantics": false,
-      "matched_keywords": [],
+      "semantic_score": 0.43,
+      "matched_keywords": [
+        "database",
+        "distributed"
+      ],
       "missing_keywords": [
-        "2+ years experience",
-        "bachelor s degree",
-        "master s degree",
-        "technical engineering",
-        "master s degree in computer science or related technical field or bachelor s degree with 2+ years technical engineering experience."
+        "experience working with distributed database systems",
+        "cosmos db"
       ],
       "evidence": {
         "requirement_id": "req_2",
-        "matched": false,
-        "confidence": 0.0,
-        "evidence_bullet_ids": [],
-        "evidence_texts": [],
-        "rationale": "Requirement 'Master's Degree in Computer Science or related technical field OR Bachelor's Degree with 2+ years technical engineering experience.' has weak or missing direct evidence in the resume."
+        "matched": true,
+        "confidence": 0.65,
+        "evidence_bullet_ids": [
+          "exp_1_bullet_3",
+          "exp_0_bullet_3",
+          "proj_2_bullet_0"
+        ],
+        "evidence_texts": [
+          "Architected full-stack structure to support database management, data analysis and result visualization.",
+          "Built data retrieval & management website software, with monitoring and alerting logic to detect service anomalies, trigger recovery workflows, and improve operational reliability.",
+          "Developed a full-stack multi-user software platform that can be used as a base to multi-player games or user data management."
+        ],
+        "rationale": "Requirement 'Experience working with distributed database systems' is supported mainly by explicit lexical/keyword evidence."
       }
     },
     {
       "requirement_id": "req_3",
-      "requirement_text": "Experience working with Service Fabric or Kubernetes.",
-      "importance": "preferred",
+      "requirement_text": "Experience working with Azure technologies",
+      "importance": "required",
       "matched_by_skill": false,
+      "matched_by_keyword": false,
+      "ats_matched": false,
       "matched_by_semantics": false,
+      "semantic_score": 0.2781,
       "matched_keywords": [],
       "missing_keywords": [
-        "kubernetes",
-        "service fabric",
-        "experience working with service fabric or kubernetes."
+        "experience working with azure technologies",
+        "azure",
+        "cloud"
       ],
       "evidence": {
         "requirement_id": "req_3",
@@ -186,50 +156,30 @@
         "confidence": 0.0,
         "evidence_bullet_ids": [],
         "evidence_texts": [],
-        "rationale": "Requirement 'Experience working with Service Fabric or Kubernetes.' has weak or missing direct evidence in the resume."
+        "rationale": "Requirement 'Experience working with Azure technologies' has weak direct evidence in the resume."
       }
     },
     {
       "requirement_id": "req_4",
-      "requirement_text": "Experience working on large-scale distributed systems, client-server architectures, and distributed database systems.",
-      "importance": "preferred",
-      "matched_by_skill": true,
+      "requirement_text": "Excellent cross group collaboration, negotiation and communication skills",
+      "importance": "required",
+      "matched_by_skill": false,
+      "matched_by_keyword": true,
+      "ats_matched": true,
       "matched_by_semantics": false,
-      "matched_keywords": [
-        "large-scale distributed systems",
-        "experience working on large-scale distributed systems client-server architectures and distributed database systems."
-      ],
-      "missing_keywords": [
-        "client-server architectures",
-        "distributed database systems"
-      ],
-      "evidence": {
-        "requirement_id": "req_4",
-        "matched": true,
-        "confidence": 0.61,
-        "evidence_bullet_ids": [],
-        "evidence_texts": [],
-        "rationale": "Requirement 'Experience working on large-scale distributed systems, client-server architectures, and distributed database systems.' appears supported by the extracted resume skill set."
-      }
-    },
-    {
-      "requirement_id": "req_5",
-      "requirement_text": "Excellent cross group collaboration, negotiation and communication skills.",
-      "importance": "preferred",
-      "matched_by_skill": true,
-      "matched_by_semantics": true,
+      "semantic_score": 0.2594,
       "matched_keywords": [
         "communication"
       ],
       "missing_keywords": [
+        "excellent cross group collaboration negotiation and communication skills",
         "collaboration",
-        "negotiation",
-        "excellent cross group collaboration negotiation and communication skills."
+        "negotiation"
       ],
       "evidence": {
-        "requirement_id": "req_5",
+        "requirement_id": "req_4",
         "matched": true,
-        "confidence": 0.88,
+        "confidence": 0.3,
         "evidence_bullet_ids": [
           "proj_2_bullet_1",
           "proj_2_bullet_2"
@@ -238,193 +188,23 @@
           "Implemented real-time client-server communication using WebSockets (Socket.IO), with scalable state synchronization and event-driven message handling for concurrent multi-user sessions.",
           "Designed modular communication flows and failure-handling logic to improve session consistency and service robustness under reconnect and partial failure scenarios."
         ],
-        "rationale": "Requirement 'Excellent cross group collaboration, negotiation and communication skills.' is supported by matching resume content and 2 relevant bullet(s)."
-      }
-    },
-    {
-      "requirement_id": "req_6",
-      "requirement_text": "Ability to deal with the ambiguity associated with working in a fast-paced and changing environment.",
-      "importance": "preferred",
-      "matched_by_skill": false,
-      "matched_by_semantics": false,
-      "matched_keywords": [],
-      "missing_keywords": [
-        "ambiguity",
-        "changing environment",
-        "fast-paced",
-        "ability to deal with the ambiguity associated with working in a fast-paced and changing environment."
-      ],
-      "evidence": {
-        "requirement_id": "req_6",
-        "matched": false,
-        "confidence": 0.0,
-        "evidence_bullet_ids": [],
-        "evidence_texts": [],
-        "rationale": "Requirement 'Ability to deal with the ambiguity associated with working in a fast-paced and changing environment.' has weak or missing direct evidence in the resume."
-      }
-    },
-    {
-      "requirement_id": "req_7",
-      "requirement_text": "Experience working with M365 components like AAD, Exchange, Substrate, SharePoint.",
-      "importance": "preferred",
-      "matched_by_skill": false,
-      "matched_by_semantics": false,
-      "matched_keywords": [],
-      "missing_keywords": [
-        "aad",
-        "exchange",
-        "m365",
-        "sharepoint",
-        "substrate",
-        "experience working with m365 components like aad exchange substrate sharepoint."
-      ],
-      "evidence": {
-        "requirement_id": "req_7",
-        "matched": false,
-        "confidence": 0.0,
-        "evidence_bullet_ids": [],
-        "evidence_texts": [],
-        "rationale": "Requirement 'Experience working with M365 components like AAD, Exchange, Substrate, SharePoint.' has weak or missing direct evidence in the resume."
-      }
-    },
-    {
-      "requirement_id": "req_8",
-      "requirement_text": "Solid passion for delivering high-quality, resilient, large scale services.",
-      "importance": "preferred",
-      "matched_by_skill": false,
-      "matched_by_semantics": false,
-      "matched_keywords": [],
-      "missing_keywords": [
-        "high-quality",
-        "large scale services",
-        "passion",
-        "resilient",
-        "solid passion for delivering high-quality resilient large scale services."
-      ],
-      "evidence": {
-        "requirement_id": "req_8",
-        "matched": false,
-        "confidence": 0.0,
-        "evidence_bullet_ids": [],
-        "evidence_texts": [],
-        "rationale": "Requirement 'Solid passion for delivering high-quality, resilient, large scale services.' has weak or missing direct evidence in the resume."
-      }
-    },
-    {
-      "requirement_id": "req_9",
-      "requirement_text": "Solid coding and development skills with experience in at least one of the following languages: C#, .Net Core, Java.",
-      "importance": "preferred",
-      "matched_by_skill": false,
-      "matched_by_semantics": false,
-      "matched_keywords": [],
-      "missing_keywords": [
-        ".net core",
-        "c#",
-        "java",
-        "coding skills",
-        "solid coding and development skills with experience in at least one of the following languages c# .net core java."
-      ],
-      "evidence": {
-        "requirement_id": "req_9",
-        "matched": false,
-        "confidence": 0.0,
-        "evidence_bullet_ids": [],
-        "evidence_texts": [],
-        "rationale": "Requirement 'Solid coding and development skills with experience in at least one of the following languages: C#, .Net Core, Java.' has weak or missing direct evidence in the resume."
-      }
-    },
-    {
-      "requirement_id": "req_10",
-      "requirement_text": "Passionate about solving challenging problems.",
-      "importance": "preferred",
-      "matched_by_skill": false,
-      "matched_by_semantics": false,
-      "matched_keywords": [],
-      "missing_keywords": [
-        "challenging",
-        "passionate",
-        "solving problems",
-        "passionate about solving challenging problems."
-      ],
-      "evidence": {
-        "requirement_id": "req_10",
-        "matched": false,
-        "confidence": 0.0,
-        "evidence_bullet_ids": [],
-        "evidence_texts": [],
-        "rationale": "Requirement 'Passionate about solving challenging problems.' has weak or missing direct evidence in the resume."
-      }
-    },
-    {
-      "requirement_id": "req_11",
-      "requirement_text": "Drive to improve performance, availability and supportability of services.",
-      "importance": "preferred",
-      "matched_by_skill": true,
-      "matched_by_semantics": true,
-      "matched_keywords": [
-        "drive",
-        "performance"
-      ],
-      "missing_keywords": [
-        "availability",
-        "supportability",
-        "drive to improve performance availability and supportability of services."
-      ],
-      "evidence": {
-        "requirement_id": "req_11",
-        "matched": true,
-        "confidence": 0.96,
-        "evidence_bullet_ids": [
-          "exp_0_bullet_2",
-          "proj_2_bullet_1"
-        ],
-        "evidence_texts": [
-          "Added logging/diagnostic hooks to support debugging of real-time failures and performance bottlenecks.",
-          "Implemented real-time client-server communication using WebSockets (Socket.IO), with scalable state synchronization and event-driven message handling for concurrent multi-user sessions."
-        ],
-        "rationale": "Requirement 'Drive to improve performance, availability and supportability of services.' is supported by matching resume content and 2 relevant bullet(s)."
-      }
-    },
-    {
-      "requirement_id": "req_12",
-      "requirement_text": "Drive to increase efficiencies through automation.",
-      "importance": "preferred",
-      "matched_by_skill": true,
-      "matched_by_semantics": true,
-      "matched_keywords": [
-        "drive"
-      ],
-      "missing_keywords": [
-        "automation",
-        "efficiencies",
-        "drive to increase efficiencies through automation."
-      ],
-      "evidence": {
-        "requirement_id": "req_12",
-        "matched": true,
-        "confidence": 0.88,
-        "evidence_bullet_ids": [
-          "proj_2_bullet_1"
-        ],
-        "evidence_texts": [
-          "Implemented real-time client-server communication using WebSockets (Socket.IO), with scalable state synchronization and event-driven message handling for concurrent multi-user sessions."
-        ],
-        "rationale": "Requirement 'Drive to increase efficiencies through automation.' is supported by matching resume content and 1 relevant bullet(s)."
+        "rationale": "Requirement 'Excellent cross group collaboration, negotiation and communication skills' is supported mainly by explicit lexical/keyword evidence."
       }
     }
   ],
   "priority_gaps": [
-    "Bachelor's Degree in Computer Science or related technical discipline OR equivalent experience."
+    "Experience working with Azure technologies"
   ],
   "strongest_evidence_bullets": [
     "Designed and implemented backend services and data processing modules in C++/Python, optimizing for low-latency (-10ms for sensor network) and high-throughput system integration, documented comprehensive technical specifications based on Ph.D. findings.",
-    "Implemented and optimized modular C++ components under real-time constraints, reducing processing latency to below 10 ms.",
-    "Developed and optimized vehicle-mounted radar signal processing algorithms in C++.",
-    "Implemented real-time client-server communication using WebSockets (Socket.IO), with scalable state synchronization and event-driven message handling for concurrent multi-user sessions.",
-    "Designed modular communication flows and failure-handling logic to improve session consistency and service robustness under reconnect and partial failure scenarios."
+    "Designed and developed automated pipelines for structured data retrieval and preprocessing to support downstream analytics and machine learning workflows.",
+    "Architected full-stack structure to support database management, data analysis and result visualization.",
+    "Built data retrieval & management website software, with monitoring and alerting logic to detect service anomalies, trigger recovery workflows, and improve operational reliability.",
+    "Developed a full-stack multi-user software platform that can be used as a base to multi-player games or user data management."
   ],
   "rewrite_suggestions": [],
   "tailored_summary": null,
   "interview_questions": [],
-  "overall_assessment": "Overall alignment appears limited. Strongest overlap: Proven experience coding in languages including, but not limited to, C, C++, C#, Java, JavaScript, or Python., Experience working on large-scale distributed systems, client-server architectures, and distributed database systems., Excellent cross group collaboration, negotiation and communication skills., Drive to improve performance, availability and supportability of services., Drive to increase efficiencies through automation.. Primary gaps: Bachelor's Degree in Computer Science or related technical discipline OR equivalent experience., Master's Degree in Computer Science or related technical field OR Bachelor's Degree with 2+ years technical engineering experience., Experience working with Service Fabric or Kubernetes., Ability to deal with the ambiguity associated with working in a fast-paced and changing environment., Experience working with M365 components like AAD, Exchange, Substrate, SharePoint.."
+  "overall_assessment": "Overall alignment appears limited. ATS-style and semantic alignment are broadly consistent.",
+  "metadata": null
 }
