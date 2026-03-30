@@ -1,94 +1,63 @@
-Job Matcher (ATS + Semantic Hybrid)
+🧠 Job Matcher (ATS + Semantic Hybrid)
 
-A hybrid job matching system that combines rule-based ATS-style keyword matching with semantic similarity modeling, designed to simulate real-world hiring pipelines while improving matching quality beyond traditional ATS systems.
+A hybrid job matching system that combines ATS-style keyword matching with semantic understanding, designed to simulate real-world hiring pipelines while improving matching quality.
 
-Motivation
+🚀 Motivation
 
-Most Applicant Tracking Systems (ATS) rely heavily on keyword matching, which leads to:
+Most Applicant Tracking Systems (ATS):
+rely heavily on keyword matching
+fail to capture semantic equivalence
+often filter out strong candidates unfairly
 
-Missing strong candidates due to wording differences
-Overweighting superficial keyword overlap
-Ignoring semantic equivalence (e.g., "distributed system" vs "microservices architecture")
+This project is built to answer a practical question:
+Can we model how ATS actually works — and improve it without breaking it?
 
-This project aims to:
+🧠 Core Idea
 
-Reproduce ATS behavior (for realism)
-Enhance it with semantic understanding
-Bridge the gap between machine filtering and human judgment
+We design a dual-channel matching system:
+ATS channel → ensures real-world compatibility
+Semantic channel → captures true capability
 
-Core Idea
-
-We use a dual-channel matching system:
-
-1. ATS Channel (Deterministic)
-Exact keyword matching
-Skill dictionary / known terms
-Weighted scoring based on frequency and importance
-2. Semantic Channel (Intelligent)
-Embedding-based similarity
-Captures meaning beyond exact wording
-Handles paraphrases and domain variation
-
-Final Score
-
-A weighted combination:
-
+🔀 Final Score
 Final Score = α * ATS_score + β * Semantic_score
 
-Where:
+This preserves deployability while improving accuracy.
 
-ATS ensures real-world compatibility
-Semantic ensures true capability recognition
-System Architecture
-                ┌──────────────┐
-                │   Resume     │
-                └──────┬───────┘
-                       │
-                ┌──────▼───────┐
-                │   Parser     │
-                └──────┬───────┘
-                       │
-        ┌──────────────┴──────────────┐
-        │                             │
-┌───────▼────────┐         ┌──────────▼────────┐
-│ ATS Matcher    │         │ Semantic Matcher  │
-│ (Keyword)      │         │ (Embeddings)      │
-└───────┬────────┘         └──────────┬────────┘
-        │                             │
-        └──────────────┬──────────────┘
-                       │
-                ┌──────▼───────┐
-                │ Score Fusion │
-                └──────┬───────┘
-                       │
-                ┌──────▼───────┐
-                │ Final Score  │
-                └──────────────┘
-Features
-Hybrid ATS + semantic matching
-Modular architecture (easy to extend)
-Explainable scoring (keyword vs semantic contribution)
-Embedding-based similarity (LLM-ready)
-Customizable skill taxonomy
-Installation
-git clone https://github.com/rhonand/job-matcher.git
+🏗️ System Architecture
+flowchart TD
+    Resume --> Parser
+    JD[Job Description] --> Parser
+
+    Parser --> ATS[ATS Matcher<br/>(Keyword)]
+    Parser --> Semantic[Semantic Matcher<br/>(Embeddings)]
+
+    ATS --> Fusion[Score Fusion]
+    Semantic --> Fusion
+
+    Fusion --> Final[Final Score]
+⚙️ Features
+
+🔍 Hybrid ATS + semantic matching
+🧩 Modular architecture (easy to extend)
+📊 Explainable scoring
+🧠 Embedding-based similarity (LLM-ready)
+🛠️ Customizable skill taxonomy
+📦 Installation
+git clone https://github.com/rhonand/job_matcher.git
 cd job-matcher
-
 pip install -r requirements.txt
-Usage
-1. Parse Resume & JD
+
+▶️ Usage
+1. Parse Resume & Job Description
 from matcher import parse_resume, parse_job
 
 resume = parse_resume("resume.pdf")
 job = parse_job("job_description.txt")
-
 2. Run Matching
 from matcher import hybrid_match
 
 result = hybrid_match(resume, job)
-
 print(result)
-
 3. Example Output
 {
   "final_score": 0.78,
@@ -105,33 +74,37 @@ print(result)
   ]
 }
 
-Design Philosophy
+🧪 Design Philosophy
 1. ATS is NOT wrong — just incomplete
 
 We intentionally preserve keyword matching because:
 
-Real hiring pipelines depend on it
-Candidates must pass ATS before humans see them
+real hiring pipelines depend on it
+candidates must pass ATS before human review
+2. Semantic ≠ Replacement
 
-2. Semantic ≠ Replacement, but Enhancement
+Pure semantic systems:
 
-Pure semantic matching can:
+may overestimate relevance
+may ignore hard constraints
 
-Overestimate relevance
-Miss required hard constraints
+👉 We combine, not replace
 
-So we combine, not replace.
+3. Explainability First
 
-3. Explainability Matters
+This system explicitly shows:
 
-Unlike black-box scoring systems, this project:
+keyword matches (ATS view)
+semantic similarity (model view)
 
-Shows why a score is high/low
-Separates missing keywords vs semantic gaps
+This makes the system:
+
+debuggable, inspectable, and closer to real hiring behavior
+
 🔧 Customization
 Adjust scoring weights
 hybrid_match(resume, job, alpha=0.6, beta=0.4)
-Add domain-specific skills
+Extend skill taxonomy
 KNOWN_SKILLS = [
     "C++",
     "PyTorch",
@@ -140,25 +113,34 @@ KNOWN_SKILLS = [
     "Distributed Systems"
 ]
 
-Future Work
-RAG-based skill expansion
-Context-aware matching (project-level reasoning)
-Ranking multiple candidates
-Web UI for interactive analysis
-LLM-based explanation generation
-Limitations
-Depends on quality of skill extraction
-Semantic model may produce false positives
-Not a replacement for human evaluation
+📈 Future Work
+🔄 RAG-based skill expansion
+🧠 Context-aware matching (project-level reasoning)
+📊 Multi-candidate ranking
+🌐 Web UI for interactive analysis
+🤖 LLM-based explanation generation
+⚠️ Limitations
+depends on skill extraction quality
+semantic models may introduce false positives
+not a replacement for human evaluation
+💡 Why This Project Matters
 
-Why This Project Matters
+This project models a real-world gap:
 
-This is not just a toy project — it reflects a real problem:
+ATS systems filter based on keywords
+Humans evaluate based on meaning
 
-The gap between what ATS filters and what engineers can actually do
+By bridging both:
 
-By modeling both sides, this system:
+candidates can optimize resumes more effectively
+engineers can understand hiring systems deeply
+systems can become more fair and accurate
 
-Helps candidates optimize resumes
-Helps engineers understand hiring systems
-Moves toward fairer evaluation
+🧷 Author Insight (Key Highlight)
+
+A key observation behind this project:
+
+Many hiring systems behave like deterministic filters,
+while human evaluation is semantic and contextual
+
+This project is an attempt to unify both views into a single system.
