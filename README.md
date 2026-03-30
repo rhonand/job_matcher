@@ -28,6 +28,7 @@ This preserves deployability while improving accuracy.
 ```mermaid
 flowchart TD
     Resume --> Parser
+    JD --> Parser
     Parser --> ATS
     Parser --> Semantic
     ATS --> Fusion
@@ -38,10 +39,15 @@ flowchart TD
 ⚙️ Features
 
 🔍 Hybrid ATS + semantic matching
+
 🧩 Modular architecture (easy to extend)
+
 📊 Explainable scoring
+
 🧠 Embedding-based similarity (LLM-ready)
+
 🛠️ Customizable skill taxonomy
+
 📦 Installation
 git clone https://github.com/rhonand/job_matcher.git
 cd job-matcher
@@ -114,6 +120,7 @@ KNOWN_SKILLS = [
 ]
 
 📈 Future Work
+
 🔄 RAG-based skill expansion
 
 🧠 Context-aware matching (project-level reasoning)
@@ -125,7 +132,8 @@ KNOWN_SKILLS = [
 🤖 LLM-based explanation generation
 
 ⚠️ Limitations
-depends on skill extraction quality
+
+Depends on skill extraction quality
 semantic models may introduce false positives
 not a replacement for human evaluation
 
