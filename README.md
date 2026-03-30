@@ -24,17 +24,17 @@ Final Score = α * ATS_score + β * Semantic_score
 This preserves deployability while improving accuracy.
 
 🏗️ System Architecture
+
+```mermaid
 flowchart TD
     Resume --> Parser
-    JD[Job Description] --> Parser
-
-    Parser --> ATS[ATS Matcher<br/>(Keyword)]
-    Parser --> Semantic[Semantic Matcher<br/>(Embeddings)]
-
-    ATS --> Fusion[Score Fusion]
+    Parser --> ATS
+    Parser --> Semantic
+    ATS --> Fusion
     Semantic --> Fusion
+    Fusion --> Final
+```
 
-    Fusion --> Final[Final Score]
 ⚙️ Features
 
 🔍 Hybrid ATS + semantic matching
@@ -115,14 +115,20 @@ KNOWN_SKILLS = [
 
 📈 Future Work
 🔄 RAG-based skill expansion
+
 🧠 Context-aware matching (project-level reasoning)
+
 📊 Multi-candidate ranking
+
 🌐 Web UI for interactive analysis
+
 🤖 LLM-based explanation generation
+
 ⚠️ Limitations
 depends on skill extraction quality
 semantic models may introduce false positives
 not a replacement for human evaluation
+
 💡 Why This Project Matters
 
 This project models a real-world gap:
